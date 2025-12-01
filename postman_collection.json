@@ -1,0 +1,801 @@
+{
+  "info": {
+    "_postman_id": "spark-bridge-api-collection",
+    "name": "Spark Bridge",
+    "description": "Spark Bridge API",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"secureAdminPassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products?offset=0&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", "{{product_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Product (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"T-Shirt with Variants\",\n  \"description\": \"Comfortable cotton t-shirt\",\n  \"price\": 19.99,\n  \"discountPrice\": 15.99,\n  \"images\": [\"https://example.com/tshirt.jpg\"],\n  \"stockQuantity\": 100,\n  \"category\": \"Clothing\",\n  \"variants\": [\n    {\n      \"sku\": \"TSHIRT-RED-SM\",\n      \"price\": 19.99,\n      \"discountPrice\": 15.99,\n      \"stockQuantity\": 30,\n      \"attributeValueIds\": [\"{{color_value_id}}\", \"{{size_value_id}}\"]\n   }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products"]
+            }
+          }
+        },
+        {
+          "name": "Update Product (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"T-Shirt with Variants\",\n  \"description\": \"Comfortable cotton t-shirt\",\n  \"price\": 19.99,\n  \"discountPrice\": 15.99,\n  \"images\": [\"https://example.com/tshirt.jpg\"],\n  \"stockQuantity\": 100,\n  \"category\": \"Clothing\",\n  \"variants\": [\n    {\n      \"sku\": \"TSHIRT-RED-SM\",\n      \"price\": 19.99,\n      \"discountPrice\": 15.99,\n      \"stockQuantity\": 30,\n      \"attributeValueIds\": [\"{{color_value_id}}\", \"{{size_value_id}}\"]\n   }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", "{{product_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Product (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", "{{product_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attributes",
+      "item": [
+        {
+          "name": "Attribute Types",
+          "item": [
+            {
+              "name": "Get All Attribute Types",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "attributes", "types"]
+                }
+              }
+            },
+            {
+              "name": "Get Attribute Type by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types/{{attribute_type_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "types",
+                    "{{attribute_type_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Attribute Type (Admin)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"color\",\n  \"displayName\": \"Color\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "attributes", "types"]
+                }
+              }
+            },
+            {
+              "name": "Update Attribute Type (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"Product Color\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types/{{attribute_type_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "types",
+                    "{{attribute_type_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Attribute Type (Admin)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types/{{attribute_type_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "types",
+                    "{{attribute_type_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Attribute Values",
+          "item": [
+            {
+              "name": "Get Attribute Values by Type",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/types/{{attribute_type_id}}/values",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "types",
+                    "{{attribute_type_id}}",
+                    "values"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get Attribute Value by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/values/{{attribute_value_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "values",
+                    "{{attribute_value_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create Attribute Value (Admin)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributeTypeId\": \"{{attribute_type_id}}\",\n  \"value\": \"red\",\n  \"displayValue\": \"Red\",\n  \"metadata\": {\n    \"hexCode\": \"#FF0000\",\n    \"imageUrl\": \"https://example.com/red.png\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/values",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "attributes", "values"]
+                }
+              }
+            },
+            {
+              "name": "Update Attribute Value (Admin)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayValue\": \"Bright Red\",\n  \"metadata\": {\n    \"hexCode\": \"#FF0000\",\n    \"imageUrl\": \"https://example.com/bright-red.png\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/values/{{attribute_value_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "values",
+                    "{{attribute_value_id}}"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete Attribute Value (Admin)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{access_token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/attributes/values/{{attribute_value_id}}",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "attributes",
+                    "values",
+                    "{{attribute_value_id}}"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get Comments by Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}/comments?offset=0&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", "{{product_id}}", "comments"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Great product! Really satisfied with my purchase.\",\n  \"rating\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}/comments",
+              "host": ["{{base_url}}"],
+              "path": ["api", "products", "{{product_id}}", "comments"]
+            }
+          }
+        },
+        {
+          "name": "Update Comment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated comment text\",\n  \"rating\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}/comments/{{comment_id}}",
+              "host": ["{{base_url}}"],
+              "path": [
+                "api",
+                "products",
+                "{{product_id}}",
+                "comments",
+                "{{comment_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/products/{{product_id}}/comments/{{comment_id}}",
+              "host": ["{{base_url}}"],
+              "path": [
+                "api",
+                "products",
+                "{{product_id}}",
+                "comments",
+                "{{comment_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "Get Cart Items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/cart",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cart"]
+            }
+          }
+        },
+        {
+          "name": "Add to Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": \"{{product_id}}\",\n  \"variantId\": \"{{variant_id}}\",\n  \"quantity\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cart/add",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cart", "add"]
+            }
+          }
+        },
+        {
+          "name": "Update Cart Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cart/{{cart_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cart", "{{cart_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Remove from Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/cart/{{cart_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cart", "{{cart_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Clear Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/cart",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cart"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "comment_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "cart_item_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "attribute_type_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "attribute_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "variant_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "color_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "size_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "another_color_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "another_size_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "green_color_value_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "xl_size_value_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
