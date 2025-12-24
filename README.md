@@ -1,4 +1,4 @@
-# Spark Bridge Test API
+# Supabase Test API
 
 API built with NestJS and Supabase.
 
@@ -110,5 +110,6 @@ PORT=3000
 ```
 
 ## License
+
 
 This project is licensed under the ISC License.
